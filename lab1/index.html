@@ -1,16 +1,13 @@
 <html>
 <br>
-<input type = "email" pattern="*@-.-" placeholder="example@mail.com">
+<input type = "email" pattern="[^ @]*@[^ @]*" placeholder="example@mail.com">
 <button onclick="emailCheck()">Check validation</button>
 
 <script>
 function emailCheck()
 {
     var ad = doceument.getElementById("email").value;
-    //if (ad.includes("@"))
-   // {
-    doceument.write("NIEPOPRAWNY EMAIL");
-    //}
+
 }
 
 
