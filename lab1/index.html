@@ -1,16 +1,4 @@
-<html>
-<br>
-<input type = "email" pattern="[^ @]*@[^ @]*" placeholder="example@mail.com">
-<button onclick="emailCheck()">Check validation</button>
+<label for="email">Enter your globex.com email:</label>
 
-<script>
-function emailCheck()
-{
-    var ad = doceument.getElementById("email").value;
-
-}
-
-
-</script>
-
-</html>
+<input type="email" id="email"
+       pattern=".+@globex\.com" size="30" required>
