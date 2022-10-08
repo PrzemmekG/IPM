@@ -1,4 +1,21 @@
-<label for="email">Enter your globex.com email:</label>
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Walidacja wprowadzanych danych</h1>
+<form action="/action_page.php">
+  <input type="email" id="email" name="email" placeholder="example@gmail.com">
+  //<input type="submit" value="Check validation">
+  <button onclick="emailCheck()">Check validation</button>
 
-<input type="email" id="email"
-       pattern=".+@globex\.com" size="30" required>
+    <script>
+    function emailCheck()
+    {
+    var ad = doceument.getElementById("email").value;
+
+    }
+    </script>
+</form>
+
+
+</body>
+</html>
