@@ -1,12 +1,9 @@
 
 input:valid {
-    border-color: green;
+    background-color: green;
 }
 
 input:invalid {
-    border-color: red;
+    background-color: red;
 }
 
-input:focus:invalid {
-    outline: none;
-}
