@@ -1,9 +1,9 @@
 
 input:valid {
-    background-color: green;
+    background-color: lightgreen;
 }
 
 input:invalid {
-    background-color: red;
+    background-color: lightcoral;
 }
 
