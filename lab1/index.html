@@ -8,15 +8,24 @@
 <form action="/action_page.php">
 <h5>Podaj adres e-mail:</h5>
   <input type="email" id="email" name="email" placeholder="example@gmail.com">
-  <button onclick="emailCheck()">Check validation</button>
 
   <h5>Podaj numer telefonu:</h5>
   <input type="tel" id="tel" name="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" placeholder="576-234-523">
-  <button onclick="phoneNumberCheck()">Check validation</button>
-    <script>
-    function phoneNumberCheck(){};
 
-    </script>
+  <h5>Podaj adres IP V4:</h5>
+  <input type="text" id="ipv4" name="ipv4" pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$" placeholder="192.168.1.120">
+
+  <h5>Podaj adres IP V6:</h5>
+  <input type="tel" id="tel" name="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" placeholder="576-234-523">
+
+  <h5>Podaj URL:</h5>
+  <input type="tel" id="tel" name="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" placeholder="576-234-523">
+
+  <h5>Podaj numer dowodu osobistego:</h5>
+  <input type="tel" id="tel" name="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" placeholder="576-234-523">
+
+
+
 </form>
 
 
