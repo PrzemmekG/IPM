@@ -11,7 +11,7 @@
   <button onclick="emailCheck()">Check validation</button>
 
   <h5>Podaj numer telefonu:</h5>
-  <input type="tel" id="tel" name="tel" pattern="{9}" placeholder="576234523">
+  <input type="tel" id="tel" name="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="576234523">
   <button onclick="phoneNumberCheck()">Check validation</button>
     <script>
     function phoneNumberCheck(){};
