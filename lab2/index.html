@@ -9,12 +9,22 @@
 
 <div id="gradient" style="text-align:center;">  
      <h1>Funkcjonalnosc kalendarza: </h1>
-     <input type="datetime-local" id="Calendar">
+     <input type="date" id="Calendar">
      <div id="gradient" style="text-align:center;">
-      <label for="data">Podaj jeden z pracujacych dni w tym tygodniu:</label>
-      <input required id="data" name="data" type="data" min="2022-10-17" max="2022-10-22">
+      <label for="dataogranicz">Podaj jeden z pracujacych dni w tym tygodniu:</label>
+      <input required id="dataogranicz" name="dataogranicz" type="date" min="2022-10-17" max="2022-10-17">
   </div>
 
+
+  <div>
+    <label for="czasformat12">Podaj czas w formacie 12h:</label>
+    <input required id="czasformat12" name="time1czasformat122" type="time" min="01:00" max="12:00" >
+</div>
+<br/>
+<div>
+    <label for="czasformat24">Podaj czas w formacie 24h:</label>
+    <input required id="czasformat24" name="czasformat24" type="time" >
+</div>
       <h1>Walidacja wprowadzanych danych</h1>
     <form action="/action_page.php">
 
