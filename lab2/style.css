@@ -6,3 +6,8 @@ input:invalid {
     background-color: lightcoral;
 }
 
+#grad4 {
+    height: 100px;
+    background-color: blue; /* For browsers that do not support gradients */
+    background-image: linear-gradient(-90deg, blue, green);
+  }
