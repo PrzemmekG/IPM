@@ -35,6 +35,19 @@
 
     let canvas = document.getElementById('myCanvas');
     let ctx = canvas.getContext('2d');
+    const addButton = document.getElementById("addButton");
+    canvas.width = innerWidth;
+    canvas.height = innerHeight - innerHeight * 0.01;
+    const platformX = 5;
+    const platformY = innerHeight - innerHeight * 0.05;
+    const platformWidth = innerWidth * 0.75 - 5;
+    const platformHeight = innerHeight * 0.1 - 5;
+    let bricks = [];
+    let drag = false;
+    let mouseX;
+    let mouseY;
+    let dragHoldX;
+    let dragHoldY;
 
     class Brick {
         constructor(x, y, size, color) {
