@@ -75,9 +75,9 @@
     }
 
     const addBrick = () => {
-        const x = canvas.width - canvas.width * 0.1;
-        const y = canvas.height * 0.5;
-        const size = 100;
+        const x = canvas.width  * 0.01;
+        const y = canvas.height * 0.01;
+        const size = 25;
         const color = generateColor();
         bricks.push(new Brick(x, y, size, color))
         drawBricks();
