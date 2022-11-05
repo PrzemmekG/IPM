@@ -62,17 +62,7 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    const drawBricks = () => {
-        const length = bricks.length;
-        for (let i = 0; i < length; i++) {
-            ctx.beginPath();
-            ctx.rect(bricks[i].x, bricks[i].y, bricks[i].size, bricks[i].size);
-            ctx.fillStyle = bricks[i].color;
-            ctx.fill();
-            ctx.closePath();
-        }
-        drawPlatform();
-    }
+
 
     const addBrick = () => {
         const x = canvas.width  * 0.01;
