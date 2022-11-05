@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="style.css"/>
         <script src="engine.js"></script>
-
     </head>
+
     <body>
-        <ul id="LISTA" class="moveable">
-        <li><input type="text" value="Element 1"></li>
-        <li><input type="text" value="Element 2"></li>
-        <li><input type="text" value="Element 3"></li>
-        <li><input type="text" value="Element 4"></li>
-        <li><input type="text" value="Element 5"></li>
-        </ul>
+        <ul id="sortlist">
+            <li><input type="text" value="Element 1"></li>
+            <li><input type="text" value="Element 2"></li>
+            <li><input type="text" value="Element 3"></li>
+            <li><input type="text" value="Element 4"></li>
+            <li><input type="text" value="Element 5"></li>
+          </ul>
+
+          <script>
+            window.addEventListener("DOMContentLoaded", () => {
+              slist(document.getElementById("sortlist"));
+            });
+            </script>
     </body>
+
 </html>
