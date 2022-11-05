@@ -175,8 +175,8 @@
     const collisionDetector = (x, y) => {
         const length = bricks.length;
         for (let i = 0; i < length; i++) {
-            if (Math.abs(x - bricks[i].x) < 125) {
-                if(Math.abs(y - bricks[i].y) < 125){
+            if (Math.abs(x - bricks[i].x) < 150) {
+                if(Math.abs(y - bricks[i].y) < 150){
                     return false;
                 }
             }
