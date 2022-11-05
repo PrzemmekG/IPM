@@ -62,7 +62,17 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-
+    const drawBricks = () => {
+        const length = bricks.length;
+        for (let i = 0; i < length; i++) {
+            ctx.beginPath();
+            ctx.rect(bricks[i].x, bricks[i].y, bricks[i].size, bricks[i].size);
+            ctx.fillStyle = bricks[i].color;
+            ctx.fill();
+            ctx.closePath();
+        }
+        drawPlatform();
+    }
 
     const addBrick = () => {
         const x = canvas.width  * 0.01;
@@ -165,8 +175,8 @@
     const collisionDetector = (x, y) => {
         const length = bricks.length;
         for (let i = 0; i < length; i++) {
-            if (Math.abs(x - bricks[i].x) < 100) {
-                if(Math.abs(y - bricks[i].y) < 100){
+            if (Math.abs(x - bricks[i].x) < 150) {
+                if(Math.abs(y - bricks[i].y) < 150){
                     return false;
                 }
             }
