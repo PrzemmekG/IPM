@@ -50,8 +50,8 @@ document.getElementById('addButton').onclick = function(e) {
   const book_item = {
 	name: bname,
 	author: bauthor,
-	year: byear,
-	isbn: bisbn
+	year: bisbn,
+	isbn: byear
   }
 
   var transaction = db.transaction(["books"], "readwrite");
