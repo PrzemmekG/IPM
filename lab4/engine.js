@@ -92,7 +92,7 @@ function updatetable(){
 
   document.getElementById("books-table-body").innerHTML = "";
 
-  var request = db.transaction("books").objectStore("books").openCursor();
+  var request = db.transaction("users").objectStore("users").openCursor();
 
   request.onerror = function(event){
 	console.dir(event);
