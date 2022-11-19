@@ -21,6 +21,7 @@ request.onsuccess = function(event) {
   db.onerror = function(event) {
 
 	alert("Database error: " + event.target.errorCode);
+  alert("Sprawdź czy nie ma już klienta o podanym peselu!");
   };
 
 };
