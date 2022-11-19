@@ -45,7 +45,7 @@ document.getElementById('addButton').onclick = function(e) {
   var bname = document.getElementById('nameInput').value;
   var bauthor = document.getElementById('lastNameInput').value;
   var byear = document.getElementById('adresInput').value;
-  var bisbn = document.getElementById('telInput').value;
+  var bisbn = document.getElementById('PeselInput').value;
   
   const book_item = {
 	name: bname,
