@@ -1,17 +1,6 @@
-// In the following line, you should include the prefixes of
-// implementations you want to test.
 window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-  
-// DON'T use "var indexedDB = ..." if you're not in a function.
-// Moreover, you may need references to some window.IDB* objects:
 window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction || {READ_WRITE: "readwrite"};
-// This line should only be needed if it is needed to support the
-// object's constants for older browsers
-
 window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
-// (Mozilla has never prefixed these objects, so we don't need
-// window.mozIDB*)
-
 
 if (!window.indexedDB) {
   window.alert("Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available.");
@@ -19,49 +8,33 @@ if (!window.indexedDB) {
 
 function init(){
 
-// OPENING A DATABASE
-// Let us open our database
 var request = window.indexedDB.open("MyTestDatabase", 3);
-// The second parameter is the version of the database
 
-// GENERATING HANDLERS
 request.onerror = function(event) {
-// Do something with request.errorCode!
   alert("Error faced while opening database");
 };
 request.onsuccess = function(event) {
-  // Do something with request.result!
+
   db = event.target.result;
   
-  // HANDLING ERRORS
+
   db.onerror = function(event) {
-	// Generic error handler for all errors targeted at this database's requests!
+
 	alert("Database error: " + event.target.errorCode);
   };
 
 };
-
-// CREATING OR UPDATING THE VERSION OF DATABASE
-
 request.onupgradeneeded = function(event) { 
-  // Save the IDBDatabase interface 
-  var db = event.target.result;
 
-  // Create an objectStore for this database to hold info about our books.
-  // We'll use "isbn" as our key path because we know its unique for every book
+  var db = event.target.result;
   var objectStore = db.createObjectStore("books", { keyPath: "isbn" });
 
-  // Create an index to search books by name.
   objectStore.createIndex("name", "name", {unique:false});
 
-  // Create an index to search books by author
   objectStore.createIndex("author", "author", {unique:false});
 
-  // Create an index to search books by manufactured year
   objectStore.createIndex("year", "year", {unique:false});
 
-  // Use transaction oncomplete to make sure the objectStore crration
-  // is finished before adding data into it.
   objectStore.transaction.oncomplete = function(event) {
 	
   }
@@ -70,9 +43,9 @@ request.onupgradeneeded = function(event) {
 document.getElementById('addButton').onclick = function(e) {
 
   var bname = document.getElementById('nameInput').value;
-  var bauthor = document.getElementById('authorInput').value;
-  var byear = document.getElementById('yearInput').value;
-  var bisbn = document.getElementById('isbnInput').value;
+  var bauthor = document.getElementById('lastNameInput').value;
+  var byear = document.getElementById('PeselInput').value;
+  var bisbn = document.getElementById('telInput').value;
   
   const book_item = {
 	name: bname,
