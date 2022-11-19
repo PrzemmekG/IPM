@@ -1,128 +1,140 @@
-var myNotes = new Object();
-
-myNotes.db = null;
-
-myNotes.open = function() {
-	var request = window.mozIndexedDB.open("stickynotes", "This database contains our sticky notes");
-	
-	request.onsuccess = function(e) {
-		var version = "1.0";
-		myNotes.db = e.target.result;
-		var db = myNotes.db;
-		console.log("Database version when opened " + db.version);
-		// We can only create Object stores in a setVersion transaction;
-		if(version!= db.version) {
-			var setVersionRequest = db.setVersion(version);
-			// onsuccess is the only place we can create Object Stores
-			setVersionRequest.onsuccess = function(e) {
-				console.log("Successfully changed the version to " + db.version);
-				console.log("Now creating the store \"notes\"");
-				var store = db.createObjectStore("notes", {keyPath: "timeStamp"});
-      		};
-    	}
-		// Once the database is initialized and opened, display all sticky notes
-		myNotes.getAllNotes();
-	};
-	
-	request.onerror = function(e) {
-		console.log(e.target.errorCode);
-	};
-};
-
-myNotes.addNote = function(todoText) {
-  var db = myNotes.db;
-  var trans = db.transaction(["notes"], IDBTransaction.READ_WRITE);
-  var store = trans.objectStore("notes");
-  var note = {
-    "text": todoText, 
-    "timeStamp" : new Date().getTime() 
-    };
-  var request = store.put(note);
-    
-  request.onsuccess = function(e) {
-    console.log("Note with timestamp " + e.target.result + " has been added!");
-	$('#txt_note').val('');
-	myNotes.displayNote(note);
-  };
+// In the following line, you should include the prefixes of
+// implementations you want to test.
+window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
   
-  request.onerror = function(e) {
-    console.log(e.target.errorCode);
+// DON'T use "var indexedDB = ..." if you're not in a function.
+// Moreover, you may need references to some window.IDB* objects:
+window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction || {READ_WRITE: "readwrite"};
+// This line should only be needed if it is needed to support the
+// object's constants for older browsers
+
+window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+// (Mozilla has never prefixed these objects, so we don't need
+// window.mozIDB*)
+
+
+if (!window.indexedDB) {
+  window.alert("Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available.");
+}
+
+function init(){
+
+// OPENING A DATABASE
+// Let us open our database
+var request = window.indexedDB.open("MyTestDatabase", 3);
+// The second parameter is the version of the database
+
+// GENERATING HANDLERS
+request.onerror = function(event) {
+// Do something with request.errorCode!
+  alert("Error faced while opening database");
+};
+request.onsuccess = function(event) {
+  // Do something with request.result!
+  db = event.target.result;
+  
+  // HANDLING ERRORS
+  db.onerror = function(event) {
+	// Generic error handler for all errors targeted at this database's requests!
+	alert("Database error: " + event.target.errorCode);
   };
+
 };
 
-myNotes.getAllNotes = function() {	
-	var db = myNotes.db;
-	var trans = db.transaction(["notes"], IDBTransaction.READ_WRITE);
-	var store = trans.objectStore("notes");
+// CREATING OR UPDATING THE VERSION OF DATABASE
+
+request.onupgradeneeded = function(event) { 
+  // Save the IDBDatabase interface 
+  var db = event.target.result;
+
+  // Create an objectStore for this database to hold info about our books.
+  // We'll use "isbn" as our key path because we know its unique for every book
+  var objectStore = db.createObjectStore("books", { keyPath: "isbn" });
+
+  // Create an index to search books by name.
+  objectStore.createIndex("name", "name", {unique:false});
+
+  // Create an index to search books by author
+  objectStore.createIndex("author", "author", {unique:false});
+
+  // Create an index to search books by manufactured year
+  objectStore.createIndex("year", "year", {unique:false});
+
+  // Use transaction oncomplete to make sure the objectStore crration
+  // is finished before adding data into it.
+  objectStore.transaction.oncomplete = function(event) {
 	
-	// Get everything in the store;
-	var cursorRequest = store.openCursor();
-	var notes = []; //Empty array that will be populated and then processed
-	
-	cursorRequest.onsuccess = function(e) {
-		var cursor = e.target.result;
-		if(cursor) {
-			// As long as we have objects in the store
-			// We keep adding them to the notes array
-			notes.push({"timeStamp": cursor.key, "text" : cursor.value.text});
-			cursor.continue();
-		} else {
-			//No more notes? process those notes
-			//For each notes, call displayNote()
-			var start = new Date().getTime();
-			var notesCount = notes.length;
-			for (var i = 0; i < notesCount; i++) {
-				console.log("Item number " + i + " on " + notesCount);
-			    myNotes.displayNote(notes[i]);
-			}
-			var end = new Date().getTime();
-			var total = end - start;
-			console.log("Array processed in " + total);
-		}
-	};
+  }
 };
 
-myNotes.displayNote = function(note) {
-	//Get general div containing notes and add the current note in it
-	var notesDiv = $('#notes');
-	var singleNote = $('<div class="note"><img class="delete" src="delete.png" alt="delete image"></img><p>'+ note.text +'</p></div>');
-	singleNote.find('.delete').click(function() {
-		myNotes.deleteNote(note.timeStamp);
-		singleNote.fadeOut(function() {
-			$(this).remove();
-		});
-	});
-	singleNote.hide();
-	notesDiv.append(singleNote);
-	singleNote.fadeIn();
+document.getElementById('addButton').onclick = function(e) {
+
+  var bname = document.getElementById('nameInput').value;
+  var bauthor = document.getElementById('authorInput').value;
+  var byear = document.getElementById('yearInput').value;
+  var bisbn = document.getElementById('isbnInput').value;
+  
+  const book_item = {
+	name: bname,
+	author: bauthor,
+	year: byear,
+	isbn: bisbn
+  }
+
+  var transaction = db.transaction(["books"], "readwrite");
+
+  transaction.oncomplete = function(event) {
+	console.log("all done with transaction");
+  };
+
+  transaction.onerror = function(event){
+	console.dir(event);
+  };
+
+  var booksObjectStore = transaction.objectStore("books");
+  var request = booksObjectStore.add(book_item);
+
+  request.onsuccess = function(event){
+	console.log("added item");
+  };
+
+  updatetable();
+
 };
 
-myNotes.deleteNote = function(timestamp) {
-	var db = myNotes.db;
-	var trans = db.transaction(["notes"], IDBTransaction.READ_WRITE);
-	var store = trans.objectStore("notes");
-	
-	var deleteRequest = store.delete(timestamp);
-	
-	deleteRequest.onsuccess = function(e) {
-		console.log("Item successfully deleted");
-	};
+document.getElementById('delButton').onclick = function(e){
+
+  var isbn_del = document.getElementById('isbnDelInput').value;
+
+  var request = db.transaction(["books"], "readwrite").objectStore("books").delete(isbn_del);
+
+  request.onsuccess = function(event){
+	console.log(isbn_del+" deleted");
+  };
+
+  updatetable();
 };
 
-$(document).ready(function() {
-	myNotes.open();
-	$('#btn_add').click(function() {
-		var message = $('#txt_note').val();
-		if(message !== "") {
-			myNotes.addNote(message);
-		}
-	});
-	
-	$('#addnote').hide();
-	
-	$('#menubar').toggle(function(){ 
-		$('#addnote').slideDown();
-	}, function(){ 
-		$('#addnote').slideUp();
-	});
-});
+function updatetable(){
+
+  document.getElementById("books-table-body").innerHTML = "";
+
+  var request = db.transaction("books").objectStore("books").openCursor();
+
+  request.onerror = function(event){
+	console.dir(event);
+  };
+
+  request.onsuccess = function(event){
+
+	cursor = event.target.result;
+
+	if(cursor) {
+	  document.getElementById("books-table-body").innerHTML += "<tr><td>" + cursor.value.name + "</td><td>"
+		+ cursor.value.author + "</td><td>" + cursor.value.year + "</td><td>" + cursor.key + "</td></tr>";
+
+		cursor.continue();
+	}
+  };
+}
+}
