@@ -77,7 +77,7 @@ document.getElementById('addButton').onclick = function(e) {
 
 document.getElementById('delButton').onclick = function(e){
 
-  var isbn_del = document.getElementById('PeselInput').value;
+  var isbn_del = document.getElementById('isPeselInput').value;
 
   var request = db.transaction(["books"], "readwrite").objectStore("books").delete(isbn_del);
 
