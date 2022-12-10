@@ -12,12 +12,19 @@ function randomString(arr) {
 }
 
 document.getElementById('generateButton').onclick = function (e) {
-  document.getElementById("nameInput").value = randomString(['Bartosz', 'Maciej', 'Jan', 'Paweł']);
-  document.getElementById("lastNameInput").value = Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5) + '@gmail.com';
-  document.getElementById("adresInput").value = randomString(['ABC123456', 'BCA123456', 'AAA123456', 'BBB123456', 'AWC123456', 'ACC123456', 'AFG123456', 'AFH123456',
+  bname = document.getElementById("nameInput").value = randomString(['Bartosz', 'Maciej', 'Jan', 'Paweł']);
+  bauthor = document.getElementById("lastNameInput").value = Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5) + '@gmail.com';
+  byear =document.getElementById("adresInput").value = randomString(['ABC123456', 'BCA123456', 'AAA123456', 'BBB123456', 'AWC123456', 'ACC123456', 'AFG123456', 'AFH123456',
       'ADG123456', 'WQQ123456']);
-  document.getElementById("PeselInput").value = (Math.floor(Math.random() * 89 + 10) + '-' + Math.floor(Math.random() * 899 + 100)).toString();
+      bisbn = document.getElementById("PeselInput").value = (Math.floor(Math.random() * 89 + 10) + '-' + Math.floor(Math.random() * 899 + 100)).toString();
   
+
+  const book_item = {
+    name: bname,
+    author: bauthor,
+    year: byear,
+    isbn: bisbn
+    }
 }
 
 function init(){
