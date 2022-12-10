@@ -6,27 +6,7 @@ if (!window.indexedDB) {
   window.alert("Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available.");
 }
 
-function randomString(arr) {
-  let randomIndex = Math.floor(Math.random() * arr.length);
-  return arr[randomIndex];
-}
-
-
-
-
-
 function init(){
-
-  
-  document.getElementById('RandomDataButton').onclick = function(e)
-  {
-    document.getElementById('nameInput').value = randomString(['Bartek','Stefan','Marcin','Jerzy','Piotrek', 'Maciej', 'Janek', 'Paweł','Kasia']);
-    document.getElementById('lastNameInput').value = randomString(['Kowalski','Gabrych','Marcinkowski','Stasiak','Kazimierczyk', 'Dobrowolski', 'Marciniak', 'Chałubek','Koza']);
-    document.getElementById('adresInput').value = randomString(['Sloneczna 45','Malinowa 0','Zrodlana 10','Pomaranczowa 50','Wroblewskiego 32', 'Brukowa 15', 'Debowa 2']);
-    document.getElementById('PeselInput').value = (Math.floor(Math.random() * 99999999999 + 10)).toString();
-  
-  };
-
 
 var request = window.indexedDB.open("MyTestDatabase", 3);
 
@@ -61,7 +41,6 @@ request.onupgradeneeded = function(event) {
   }
 };
 
-
 document.getElementById('addButton').onclick = function(e) {
 
   var bname = document.getElementById('nameInput').value;
@@ -76,7 +55,6 @@ document.getElementById('addButton').onclick = function(e) {
 	isbn: bisbn
   }
 
-  
   var transaction = db.transaction(["books"], "readwrite");
 
   transaction.oncomplete = function(event) {
