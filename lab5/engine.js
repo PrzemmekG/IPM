@@ -11,12 +11,15 @@ function randomString(arr) {
   return arr[randomIndex];
 }
 
-document.getElementById('generateButton').onclick = function (e) {
-      document.getElementById('nameInput').value = randomString(['Bartosz', 'Maciej', 'Jan', 'Paweł']);
-      document.getElementById('lastNameInput').value = randomString(['Kowalski', 'Gabrych', 'Stefanowski', 'Koza']);
-      document.getElementById('adresInput').value = Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5);
-      document.getElementById('PeselInput').value = (Math.floor(Math.random() * 89 + 10) + '-' + Math.floor(Math.random() * 899 + 100)).toString();
-}
+
+
+document.getElementById('RandomDataButton').onclick = function(e)
+{
+  document.getElementById('nameInput').value = randomString(['Bartosz', 'Maciej', 'Jan', 'Paweł']);
+  document.getElementById('lastNameInput').value = randomString(['Kowalski', 'Gabrych', 'Stefanowski', 'Koza']);
+  document.getElementById('adresInput').value = Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5);
+  document.getElementById('PeselInput').value = (Math.floor(Math.random() * 89 + 10) + '-' + Math.floor(Math.random() * 899 + 100)).toString();
+};
 
 function init(){
 
