@@ -74,7 +74,11 @@ document.getElementById('addButton').onclick = function(e) {
 	year: byear,
 	isbn: bisbn
   }
-
+  const demoDiv = document.getElementById("div-container");
+  const btn =  document.createElement("BUTTON");
+  btn.innerHTML = "I am a button";
+  demoDiv.appendChild(btn);a
+  
   var transaction = db.transaction(["books"], "readwrite");
 
   transaction.oncomplete = function(event) {
