@@ -77,7 +77,7 @@ document.getElementById('addButton').onclick = function(e) {
   const demoDiv = document.getElementById("div-container");
   const btn =  document.createElement("BUTTON");
   btn.innerHTML = "I am a button";
-  demoDiv.appendChild(btn);a
+  demoDiv.appendChild(btn);
   
   var transaction = db.transaction(["books"], "readwrite");
 
