@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="engine.js"></script>
+</head>
+
+<body onload="init()">
+  
+    <h1>ZARZĄDZANIE DANYMI KLIENTÓW</h1>
+
+    <p>
+        <div id="addForm">
+            <legend>DODAJ KLIENTA</legend>
+            <label>Imię: </label>
+            <input id="nameInput">
+            <label>Nazwisko: </label>
+            <input id="lastNameInput">
+            <label>ADRES: </label>
+            <input id="adresInput">
+            <label>PESEL: </label>
+            <input id="PeselInput">
+            <button id="addButton">Dodaj</button>
+        </div>
+    </p>
+
+    <p>
+      <div id="deleteForm">
+        <legend>USUŃ KLIENTA</legend>
+        <label>PESEL</label>
+        <input id="isPeselInput">
+        <button id="delButton">Usuń</button>
+      </div>
+    </p>
+
+    <table id="books-table">
+        <thead>
+            <tr>LISTA KLIENTÓW W BAZIE</tr>
+            <tr><th>IMIE: </th><th>NAZWISKO: </th><th>ADRES: </th><th>PESEL: </th></tr>
+        </thead>
+        <tbody id="books-table-body">
+        </tbody>
+    </table>
+
+</body>
+</html>
