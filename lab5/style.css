@@ -32,25 +32,23 @@ h1 {
     z-index: -1;
   }
 
+  body {
+    font: 16px/1.5 Helvetica, Arial, sans-serif;
+  }
   table {
-    overflow: hidden;
-  }
-  
-  tr:hover {
-    background-color: #ffa;
-  }
-  
-  td, th {
-    position: relative;
-  }
-  td:hover::after,
-  th:hover::after {
-    content: "";
-    position: absolute;
-    background-color: #ffa;
-    left: 0;
-    top: -5000px;
-    height: 10000px;
-    width: 100%;
-    z-index: -1;
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    th {
+      text-align: left;
+    }
+    tr, col {
+      transition: all .3s;
+    }
+    tbody tr:hover {
+      background-color: rgba(0,140,203,.2);
+    }
+    col.hover {
+      background-color: rgba(0,140,203,.2);
+    }
   }
