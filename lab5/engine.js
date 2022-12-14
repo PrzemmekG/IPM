@@ -82,9 +82,9 @@ request.onupgradeneeded = function(event) {
 	
   }
 };
-
+var bKontrola;
 document.getElementById('addButton').onclick = function(e) {
-
+bKontrola = 1;
   var bname = document.getElementById('nameInput').value;
   var blastname = document.getElementById('lastNameInput').value;
   var badres = document.getElementById('adresInput').value;
@@ -121,6 +121,8 @@ document.getElementById('addButton').onclick = function(e) {
   updatetable();
 
 };
+let delUser;
+var idBtnDel;
 
 
 function updatetable(){
@@ -144,13 +146,18 @@ function updatetable(){
     let td = document.getElementById("ClientTable");
     but.innerText = "Usun";
     but.className = "btn_buy";
-    but.id = cursor.key;
-    var id = cursor.key;
+    but.id = cursor.value.pesel;
+    idBtnDel = cursor.key;
 	  document.getElementById("ClientTable").innerHTML += "<tbody><td>" + cursor.value.name + "</td><td>"
 		+ cursor.value.lastname + "</td><td>" + cursor.value.adres + "</td><td>" + cursor.value.pesel + "</td><td>" 
     + cursor.value.phone +  "</td><td>" + cursor.value.mail + "</td><td>"
-    + "<button type='button' onclick='"+deleteUser(cursor.value.pesel)+"' >Usun</button>"+ "</td><td>" + "<button type='button' >Edytuj</button>";
+    + "<button type='button' id='"+cursor.value.pesel+"' onclick='"+function kasujemy(){deleteUser(cursor.value.pesel)}+"' >Usun</button>"+ "</td><td>" + "<button type='button' >Edytuj</button>";
 
+    // if(bKontrola != 1)
+    // {
+    //   delUser = document.getElementById(cursor.value.pesel).onclick = deleteUser(cursor.value.pesel);
+    // }
+   bKontrola = 0;
     //document.getElementById(cursor.key).onclick = "dilejt()";
     //but.onclick = function() { dilejt()};
     //document.getElementById("books-table-body").appendChild(but);
