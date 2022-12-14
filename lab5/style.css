@@ -1,11 +1,35 @@
-h1 {
-    color: blue;
-    font-family: verdana;
-    font-size: 300%;
-  }
-  p {
-    color: red;
-    font-family: courier;
-    font-size: 160%;
-  }
 
+
+h1 {
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+
+#ClientTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#ClientTable td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#ClientTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#ClientTable tr:hover {background-color: #ddd;}
+
+#ClientTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #2e6db6;
+  color: white;
+}

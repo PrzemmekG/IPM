@@ -1,46 +1,53 @@
-<!DOCTYPE html>
+<html>
+
 <head>
-    
-    <script src="engine.js"></script>
+  <title>Menadżer klientów</title>
+  <meta charset="UTF-8" />
+  <script src="engine.js"></script>
+  <link rel="stylesheet" href="style.css"/>
+
+  <link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet'>
+
 </head>
 
 <body onload="init()">
-  
-    <h1>ZARZĄDZANIE DANYMI KLIENTÓW</h1>
+<h1>Menadżer klientów</h1>
 
-    <p>
-        <div id="addForm">
-            <legend>DODAJ KLIENTA</legend>
-            <label>Imię: </label>
-            <input id="nameInput">
-            <label>Nazwisko: </label>
-            <input id="lastNameInput">
-            <label>ADRES: </label>
-            <input id="adresInput">
-            <label>PESEL: </label>
-            <input id="PeselInput">
-            <button id="addButton">Dodaj</button>
-            <button id="RandomDataButton">Wygeneruj dane</button>
-        </div>
-    </p>
+<div class="MENU">
+  <legend>DODAJ KLIENTA</legend>
+  <label>Imię: </label>
+  <input id="nameInput" placeholder="Imie...">
+  <label>Nazwisko: </label>
+  <input id="lastNameInput" placeholder="Nazwisko...">
+  <label>ADRES: </label>
+  <input id="adresInput" placeholder="ul.Ulica Nr">
+  <label>PESEL: </label>
+  <input id="PeselInput" placeholder="12345678901">
+  <label>Tel: </label>
+  <input id="PhoneInput" placeholder="576-234-523">
+  <label>Mail: </label>
+  <input id="MailInput"placeholder="example@mail.com">
+</div>
+<button id="addButton">Dodaj</button>
+<button id="RandomDataButton">Wygeneruj dane</button>
 
-    <p>
-      <div id="deleteForm">
-        <legend>USUŃ KLIENTA</legend>
-        <label>PESEL</label>
-        <input id="isPeselInput">
-        <button id="delButton">Usuń</button>
-      </div>
-    </p>
 
-    <table id="books-table">
-        <thead>
-            <tr>LISTA KLIENTÓW W BAZIE</tr>
-            <tr><th>IMIE: </th><th>NAZWISKO: </th><th>ADRES: </th><th>PESEL: </th></tr>
-        </thead>
-        <tbody id="books-table-body">
-        </tbody>
-    </table>
+<div>
 
+  <table class="Clients" id="ClientTable">
+    <thead>
+      <tr>
+        <th>IMIE</th>
+        <th>NAZWISKO</th>
+        <th>ADRES</th>
+        <th>PESEL</th>
+        <th>TEL.</th>
+        <th>MAIL</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
 </body>
+
 </html>
