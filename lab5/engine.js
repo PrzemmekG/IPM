@@ -30,6 +30,21 @@ function init(){
   
   };
 
+
+  function deleteUser(peselId)
+  {
+  
+    var request = db.transaction(["users"], "readwrite").objectStore("users").delete(peselId);
+  
+    request.onsuccess = function(event){
+    console.log(peselId+" deleted");
+    };
+  
+    updatetable();
+  };
+
+
+
 function randomString(arr) {
   let randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
@@ -131,10 +146,10 @@ function updatetable(){
     but.className = "btn_buy";
     but.id = cursor.key;
     var id = cursor.key;
-	  document.getElementById("ClientTable").innerHTML += "<tr><td>" + cursor.value.name + "</td><td>"
+	  document.getElementById("ClientTable").innerHTML += "<tbody><td>" + cursor.value.name + "</td><td>"
 		+ cursor.value.lastname + "</td><td>" + cursor.value.adres + "</td><td>" + cursor.value.pesel + "</td><td>" 
     + cursor.value.phone +  "</td><td>" + cursor.value.mail + "</td><td>"
-    + "<button type='button' id='id' >Usun</button>"+ "</td><td>" + "<button type='button' >Edytuj</button>";
+    + "<button type='button' onclick='"+deleteUser(cursor.value.pesel)+"' >Usun</button>"+ "</td><td>" + "<button type='button' >Edytuj</button>";
 
     //document.getElementById(cursor.key).onclick = "dilejt()";
     //but.onclick = function() { dilejt()};
