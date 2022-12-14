@@ -147,20 +147,24 @@ function updatetable(){
     but.innerText = "Usun";
     but.className = "btn_buy";
     but.id = cursor.value.pesel;
-    idBtnDel = cursor.key;
+    idBtnDel = cursor.value.pesel;
 	  document.getElementById("ClientTable").innerHTML += "<tbody><td>" + cursor.value.name + "</td><td>"
 		+ cursor.value.lastname + "</td><td>" + cursor.value.adres + "</td><td>" + cursor.value.pesel + "</td><td>" 
     + cursor.value.phone +  "</td><td>" + cursor.value.mail + "</td><td>"
-    + "<button type='button' id='"+cursor.value.pesel+"' onclick='"+function kasujemy(){deleteUser(cursor.value.pesel)}+"' >Usun</button>"+ "</td><td>" + "<button type='button' >Edytuj</button>";
+    + "<button type='button' id='"+cursor.value.pesel+"'  >Usun</button>"+ "</td><td>" + "<button type='button' >Edytuj</button>";
 
     // if(bKontrola != 1)
     // {
     //   delUser = document.getElementById(cursor.value.pesel).onclick = deleteUser(cursor.value.pesel);
     // }
+    document.getElementById(idBtnDel).addEventListener('click', function handleClick(_) {
+      deleteUser(idBtnDel);
+  });
+
    bKontrola = 0;
     //document.getElementById(cursor.key).onclick = "dilejt()";
     //but.onclick = function() { dilejt()};
-    //document.getElementById("books-table-body").appendChild(but);
+    //document.getElementById("books-table-body").appendChild(but);S
 		cursor.continue();
 	}
   };
