@@ -44,55 +44,35 @@ function init(){
     updatetable();
   };
 
-  function editUser(pesel2)
+  function editUser(pesel)
   {
 
-  // Declare variables
-  var input, filter, table, tr, td,t1,t2,t3,t4,t5,t0, i, txtValue;
-  input = document.getElementById(pesel2);
-  filter = input.value.toUpperCase();
-  table = document.getElementById("ClientTable");
-  tr = table.getElementsByTagName("tr");
 
-    var odczytName,odczytLname,odczytAdres,odczytPesel,odczytPesel,odczytPhone,odczytMail;
+    var transaction = db.transaction(["users"], "readwrite");
+    var store = transaction.objectStore("users");
 
-  for (i = 0; i < tr.length; i++) {
-    t0 = tr[i].getElementsByTagName("td")[0];
-    t1 = tr[i].getElementsByTagName("td")[1];
-    t2 = tr[i].getElementsByTagName("td")[2];
-    t3 = tr[i].getElementsByTagName("td")[3];
-    t4 = tr[i].getElementsByTagName("td")[4];
-    t5 = tr[i].getElementsByTagName("td")[5];
-
-
-    odczytName =  t0.textContent || t0.innerText;
-    odczytLname = t1.textContent || t1.innerText;
-    odczytAdres =  t2.textContent || t2.innerText;
-    odczytPesel = t3.textContent || t3.innerText;
-    odczytPhone = t4.textContent || t4.innerText;
-    odczytMail = t5.textContent || t5.innerText;
-    td = tr[i].getElementsByTagName("td")[3];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    var request = store.openCursor();
+    request.onsuccess = function () {
+        let cursor = request.result;
+        if (cursor) {
+            if (cursor.value.pesel == pesel) {
+              document.getElementById('nameInput').value =cursor.value.name;
+              document.getElementById('lastNameInput').value =cursor.value.lastname;
+              document.getElementById('adresInput').value = cursor.value.adres;
+              document.getElementById('PeselInput').value = cursor.value.pesel;
+              document.getElementById('PhoneInput').value = cursor.value.phone;
+              document.getElementById('MailInput').value = cursor.value.mail;
         
-        document.getElementById('nameInput').value =odczytName;
-        document.getElementById('lastNameInput').value =odczytLname ;
-        document.getElementById('adresInput').value = odczytAdres;
-        document.getElementById('PeselInput').value = odczytPesel;
-        document.getElementById('PhoneInput').value = odczytPhone;
-        document.getElementById('MailInput').value = odczytMail;
-  
-      } else {
-        tr[i].style.display = "none";
+            } else {
+                cursor.continue();
+            }
+        }
+    };
 
-      }
-    }
-  }
 
   
     updatetable();
-  };
+}
 
 
 
@@ -213,14 +193,9 @@ bKontrola = 1;
   updatetable();
 
 };
-let delUser;
-var idBtnDel;
-
 
 function updatetable(){
-
-  
-  document.getElementById("ClientTable").innerHTML = "";
+  document.getElementById("ClientsBody").innerHTML = "";
 
   var request = db.transaction("users").objectStore("users").openCursor();
 
@@ -231,38 +206,72 @@ function updatetable(){
   request.onsuccess = function(event){
 
 	cursor = event.target.result;
+  var allUsers = [];
 
-	if(cursor) {
+  if(cursor != null) {
+    allUsers.push(cursor.value)
+    cursor.continue();
+  }
 
-    // let but = document.createElement("button");
-    // let td = document.getElementById("ClientTable");
-    // but.innerText = "Usun";
-    // but.className = "btn_buy";
-    // but.id = cursor.value.pesel;
-    idBtnDel = cursor.value.pesel;
-	  document.getElementById("ClientTable").innerHTML += "<tbody><td>" + cursor.value.name + "</td><td>"
-		+ cursor.value.lastname + "</td><td>" + cursor.value.adres + "</td><td>" + cursor.value.pesel + "</td><td>" 
-    + cursor.value.phone +  "</td><td>" + cursor.value.mail + "</td><td>"
-    + "<button type='button' id='"+cursor.value.pesel+"'  >Usun</button>"+ "</td><td>" + "<button type='button' id='"+(cursor.value.pesel+10)+"' >Edytuj</button>";
+  
+  var tHeadRef  = document.getElementById('ClientsHead').innerHTML =    "<td>IMIE</td><td>NAZWISKO</td><td>ADRES</td><td>PESEL</td><td>TEL</td><td>MAIL</td>";
 
-    // if(bKontrola != 1)
-    // {
-    //   delUser = document.getElementById(cursor.value.pesel).onclick = deleteUser(cursor.value.pesel);
-    // // }
-    // console.log(cursor.value.pesel);
- 
-    document.getElementById(idBtnDel).addEventListener('click', function handleClick(_) {
-      deleteUser(idBtnDel);
-  });
-  document.getElementById((idBtnDel+10)).addEventListener('click', function handleClick(_) {
-    editUser(idBtnDel);
-});
-   bKontrola = 0;
-    //document.getElementById(cursor.key).onclick = "dilejt()";
-    //but.onclick = function() { dilejt()};
-    //document.getElementById("books-table-body").appendChild(but);S
-		cursor.continue();
-	}
+    allUsers.forEach((element) => {
+
+      
+      var tbodyRef  = document.createElement('tbody');
+
+      var nameTd = document.createElement('td');
+      nameTd.textContent =  element.name;
+
+      var lastnameTd = document.createElement('td');
+      lastnameTd.textContent =  element.lastname;
+
+      var adresTd = document.createElement('td');
+      adresTd.textContent =  element.adres;
+
+      var peselTd = document.createElement('td');
+      peselTd.textContent =  element.pesel;
+
+      var phoneTd = document.createElement('td');
+      phoneTd.textContent =  element.phone;
+
+      var mailTd = document.createElement('td');
+      mailTd.textContent =  element.mail;
+
+      tbodyRef.appendChild(nameTd);
+      tbodyRef.appendChild(lastnameTd);
+      tbodyRef.appendChild(adresTd);
+      tbodyRef.appendChild(peselTd);
+      tbodyRef.appendChild(phoneTd);
+      tbodyRef.appendChild(mailTd);
+      
+      var full = document.getElementById("ClientsBody");
+
+
+
+      var deleteTitle = document.createElement("button");
+      deleteTitle.innerText = `Usun`;
+
+
+      var editTile = document.createElement("button");
+      editTile.innerText = `Edytuj`;
+
+
+      deleteTitle.addEventListener('click', function handleClick(_) {
+          deleteUser(element.pesel);
+      });
+
+      editTile.addEventListener('click', function handleClick(_) {
+        editUser(element.pesel);
+    });
+
+    tbodyRef.appendChild(deleteTitle)
+    tbodyRef.appendChild(editTile)
+      full.appendChild(tbodyRef);
+    });
+  
+
   };
 }
 
