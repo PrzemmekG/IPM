@@ -21,7 +21,7 @@ function init(){
   
     db = event.target.result;
     
-  
+    updatetable();
     db.onerror = function(event) {
   
     alert("Database error: " + event.target.errorCode);
@@ -43,14 +43,52 @@ function init(){
     updatetable();
   };
 
-  function editUser(peselId)
+  function editUser(pesel2)
   {
-    document.getElementById('nameInput').value;
-    document.getElementById('lastNameInput').value;
-    document.getElementById('adresInput').value;
-    document.getElementById('PeselInput').value;
-    document.getElementById('PhoneInput').value;
-    document.getElementById('MailInput').value;
+
+  // Declare variables
+  var input, filter, table, tr, td,t1,t2,t3,t4,t5,t0, i, txtValue;
+  input = document.getElementById(pesel2);
+  filter = input.value.toUpperCase();
+  table = document.getElementById("ClientTable");
+  tr = table.getElementsByTagName("tr");
+
+    var odczytName,odczytLname,odczytAdres,odczytPesel,odczytPesel,odczytPhone,odczytMail;
+
+  for (i = 0; i < tr.length; i++) {
+    t0 = tr[i].getElementsByTagName("td")[0];
+    t1 = tr[i].getElementsByTagName("td")[1];
+    t2 = tr[i].getElementsByTagName("td")[2];
+    t3 = tr[i].getElementsByTagName("td")[3];
+    t4 = tr[i].getElementsByTagName("td")[4];
+    t5 = tr[i].getElementsByTagName("td")[5];
+
+
+    odczytName =  t0.textContent || t0.innerText;
+    odczytLname = t1.textContent || t1.innerText;
+    odczytAdres =  t2.textContent || t2.innerText;
+    odczytPesel = t3.textContent || t3.innerText;
+    odczytPhone = t4.textContent || t4.innerText;
+    odczytMail = t5.textContent || t5.innerText;
+    td = tr[i].getElementsByTagName("td")[3];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        
+        document.getElementById('nameInput').value =odczytName;
+        document.getElementById('lastNameInput').value =odczytLname ;
+        document.getElementById('adresInput').value = odczytAdres;
+        document.getElementById('PeselInput').value = odczytPesel;
+        document.getElementById('PhoneInput').value = odczytPhone;
+        document.getElementById('MailInput').value = odczytMail;
+  
+      } else {
+        tr[i].style.display = "none";
+
+      }
+    }
+  }
+
   
     updatetable();
   };
@@ -95,6 +133,47 @@ request.onupgradeneeded = function(event) {
   }
 };
 var bKontrola;
+
+document.getElementById('EdtButton').onclick = function(e)
+{
+
+  var bname = document.getElementById('nameInput').value;
+  var blastname = document.getElementById('lastNameInput').value;
+  var badres = document.getElementById('adresInput').value;
+  var bpesel = document.getElementById('PeselInput').value;
+  var bphone = document.getElementById('PhoneInput').value;
+  var bmail = document.getElementById('MailInput').value;
+  
+  const users_item = {
+	name: bname,
+	lastname: blastname,
+	adres: badres,
+	pesel: bpesel,
+  phone: bphone,
+  mail: bmail
+  }
+
+  var transaction = db.transaction(["users"], "readwrite");
+
+  transaction.oncomplete = function(event) {
+	console.log("all done with transaction");
+  };
+
+  transaction.onerror = function(event){
+	console.dir(event);
+  };
+
+  var usersObjectStore = transaction.objectStore("users");
+  var request = usersObjectStore.put(users_item);
+
+  request.onsuccess = function(event){
+	console.log("added item");
+  };
+
+  updatetable();
+
+}
+
 document.getElementById('addButton').onclick = function(e) {
 bKontrola = 1;
   var bname = document.getElementById('nameInput').value;
@@ -163,7 +242,7 @@ function updatetable(){
 	  document.getElementById("ClientTable").innerHTML += "<tbody><td>" + cursor.value.name + "</td><td>"
 		+ cursor.value.lastname + "</td><td>" + cursor.value.adres + "</td><td>" + cursor.value.pesel + "</td><td>" 
     + cursor.value.phone +  "</td><td>" + cursor.value.mail + "</td><td>"
-    + "<button type='button' id='"+cursor.value.pesel+"'  >Usun</button>"+ "</td><td>" + "<button type='button' >Edytuj</button>";
+    + "<button type='button' id='"+cursor.value.pesel+"'  >Usun</button>"+ "</td><td>" + "<button type='button' id='"+(cursor.value.pesel+10)+"' >Edytuj</button>";
 
     // if(bKontrola != 1)
     // {
@@ -172,7 +251,9 @@ function updatetable(){
     document.getElementById(idBtnDel).addEventListener('click', function handleClick(_) {
       deleteUser(idBtnDel);
   });
-
+  document.getElementById((idBtnDel+10)).addEventListener('click', function handleClick(_) {
+    editUser(idBtnDel);
+});
    bKontrola = 0;
     //document.getElementById(cursor.key).onclick = "dilejt()";
     //but.onclick = function() { dilejt()};

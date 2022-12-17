@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Manager</title>
+</head>
+<body>
+  <h1>User Manager</h1>
+  
+  <!-- User search form -->
+  <form>
+    <label for="search-input">Search for a user:</label><br>
+    <input type="text" id="search-input" name="search-input"><br>
+    <button type="submit">Search</button>
+  </form> 
+
+  <!-- User list table -->
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>jane.doe</td>
+      <td>jane.doe@example.com</td>
+      <td>
+        <button type="button">Edit</button>
+        <button type="button">Delete</button>
+      </td>
+    </tr>
+    <!-- Add more rows for additional users -->
+  </table>
+
+  <!-- Add user form -->
+  <h2>Add a new user</h2>
+  <form>
+    <label for="username-input">Username:</label><br>
+    <input type="text" id="username-input" name="username-input"><br>
+    <label for="email-input">Email:</label><br>
+    <input type="email" id="email-input" name="email-input"><br>
+    <button type="submit">Add user</button>
+  </form> 
+</body>
+</html>
