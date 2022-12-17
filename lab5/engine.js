@@ -33,6 +33,7 @@ function init(){
 
   function deleteUser(peselId)
   {
+    console.log(peselId)
   
     var request = db.transaction(["users"], "readwrite").objectStore("users").delete(peselId);
   
@@ -233,11 +234,11 @@ function updatetable(){
 
 	if(cursor) {
 
-    let but = document.createElement("button");
-    let td = document.getElementById("ClientTable");
-    but.innerText = "Usun";
-    but.className = "btn_buy";
-    but.id = cursor.value.pesel;
+    // let but = document.createElement("button");
+    // let td = document.getElementById("ClientTable");
+    // but.innerText = "Usun";
+    // but.className = "btn_buy";
+    // but.id = cursor.value.pesel;
     idBtnDel = cursor.value.pesel;
 	  document.getElementById("ClientTable").innerHTML += "<tbody><td>" + cursor.value.name + "</td><td>"
 		+ cursor.value.lastname + "</td><td>" + cursor.value.adres + "</td><td>" + cursor.value.pesel + "</td><td>" 
@@ -247,7 +248,9 @@ function updatetable(){
     // if(bKontrola != 1)
     // {
     //   delUser = document.getElementById(cursor.value.pesel).onclick = deleteUser(cursor.value.pesel);
-    // }
+    // // }
+    // console.log(cursor.value.pesel);
+ 
     document.getElementById(idBtnDel).addEventListener('click', function handleClick(_) {
       deleteUser(idBtnDel);
   });
