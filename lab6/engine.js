@@ -243,12 +243,7 @@ function updatetable(){
       var mailTd = document.createElement('td');
       mailTd.textContent =  element.mail;
 
-      tbodyRef.appendChild(nameTd);
-      tbodyRef.appendChild(lastnameTd);
-      tbodyRef.appendChild(adresTd);
-      tbodyRef.appendChild(peselTd);
-      tbodyRef.appendChild(phoneTd);
-      tbodyRef.appendChild(mailTd);
+
       
       var full = document.getElementById("ClientsBody");
 
@@ -270,6 +265,13 @@ function updatetable(){
         editUser(element.pesel);
     });
 
+
+    tbodyRef.appendChild(nameTd);
+    tbodyRef.appendChild(lastnameTd);
+    tbodyRef.appendChild(adresTd);
+    tbodyRef.appendChild(peselTd);
+    tbodyRef.appendChild(phoneTd);
+    tbodyRef.appendChild(mailTd);
     tbodyRef.appendChild(deleteTitle)
     tbodyRef.appendChild(editTile)
       full.appendChild(tbodyRef);
