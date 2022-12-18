@@ -193,14 +193,16 @@ bKontrola = 1;
 	console.log("added item");
   };
 
-  updatetable();
-
   document.getElementById('nameInput').value = "";
   document.getElementById('lastNameInput').value = "";
   document.getElementById('adresInput').value = "";
   document.getElementById('PeselInput').value = "";
   document.getElementById('PhoneInput').value = "";
   document.getElementById('MailInput').value = "";
+
+  updatetable();
+
+
 
 };
 
