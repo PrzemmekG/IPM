@@ -31,6 +31,11 @@ function init(){
   };
 
 
+  function WyszukajKlienta()
+  {
+
+  }
+
   function deleteUser(peselId)
   {
     console.log(peselId)
